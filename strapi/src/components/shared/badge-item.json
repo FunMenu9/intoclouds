@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_badge_items",
+  "info": {
+    "displayName": "Badge Item",
+    "description": "Badge item for platforms"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "color": {
+      "type": "enumeration",
+      "enum": ["cyan", "purple", "pink", "green", "orange"],
+      "default": "cyan"
+    }
+  }
+}
