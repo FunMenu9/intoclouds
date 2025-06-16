@@ -1,30 +1,138 @@
-# React optimization
+# IntoClouds Landing Page
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+Professional cloud migration services landing page with cyberpunk design and full functionality.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/paypalaccmoldova-6413s-projects/v0-react-optimization)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/X1qcCkjGGcv)
+## 🚀 Features
 
-## Overview
+- **Next.js 14** with TypeScript
+- **Tailwind CSS** with cyberpunk design
+- **Contact form** with email integration
+- **Multi-language support** (EN, RU)
+- **Fully responsive** design
+- **PM2** process management
+- **Nginx** configuration ready
+- **Email notifications** via Nodemailer
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## 📦 Quick Start
 
-## Deployment
+\`\`\`bash
+# Clone repository
+git clone https://github.com/FunMenu9/intoclouds-landing.git
+cd intoclouds-landing
 
-Your project is live at:
+# Install dependencies
+npm install --legacy-peer-deps
 
-**[https://vercel.com/paypalaccmoldova-6413s-projects/v0-react-optimization](https://vercel.com/paypalaccmoldova-6413s-projects/v0-react-optimization)**
+# Create environment file
+cp .env.example .env.local
 
-## Build your app
+# Build and start
+npm run build
+npm start
+\`\`\`
 
-Continue building your app on:
+## 🔧 Environment Variables
 
-**[https://v0.dev/chat/projects/X1qcCkjGGcv](https://v0.dev/chat/projects/X1qcCkjGGcv)**
+Create `.env.local` file:
 
-## How It Works
+\`\`\`env
+SMTP_HOST=mail.intoclouds.io
+SMTP_PORT=465
+SMTP_USER=dev@intoclouds.io
+SMTP_PASS=your-password
+SMTP_FROM=dev@intoclouds.io
+NODE_ENV=production
+PORT=3000
+\`\`\`
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+## 🚀 Deployment
+
+### Manual Deployment
+
+\`\`\`bash
+# Build project
+npm run build
+
+# Start with PM2
+pm2 start ecosystem.config.js
+\`\`\`
+
+### Server Setup
+
+\`\`\`bash
+# Install Node.js 20+
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Install PM2
+sudo npm install -g pm2
+
+# Setup Nginx
+sudo apt install nginx -y
+\`\`\`
+
+## 📧 Contact Form
+
+The contact form sends emails via SMTP and saves messages to a JSON file. Configure your SMTP settings in `.env.local`.
+
+## 🎨 Design
+
+- **Cyberpunk aesthetic** with neon colors
+- **Gradient backgrounds** and glowing effects
+- **Responsive design** for all devices
+- **Smooth animations** and transitions
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
+- **Backend**: Node.js API Routes
+- **Email**: Nodemailer
+- **Process Manager**: PM2
+- **Web Server**: Nginx
+
+## 📱 Sections
+
+1. **Hero** - Main landing with statistics
+2. **Platforms** - AWS, Azure, GCP expertise
+3. **Services** - Cloud migration services
+4. **Process** - 4-step methodology
+5. **Contact** - Contact form and information
+
+## 🌐 Multi-language
+
+Currently supports:
+- English (EN)
+- Russian (RU)
+
+Easy to extend with additional languages.
+
+## 📄 License
+
+© 2024 IntoClouds Moldova SRL. All rights reserved.
+
+## 🤝 Support
+
+For support, email dev@intoclouds.io or create an issue.
+\`\`\`
+
+```plaintext file="public/robots.txt"
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://intoclouds.io/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Block access to admin areas
+Disallow: /admin/
+Disallow: /api/internal/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow important pages
+Allow: /
+Allow: /services
+Allow: /contact
+Allow: /about

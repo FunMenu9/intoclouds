@@ -1,3 +1,16 @@
+#!/bin/bash
+
+echo "🚀 Создание проекта IntoClouds на сервере из v0.dev"
+echo "=================================================="
+
+# Переходим в директорию проекта
+cd /var/www/intoclouds
+
+# Удаляем все существующие файлы
+sudo rm -rf * .*gitignore .git 2>/dev/null || true
+
+# Создаем package.json
+sudo -u intoclouds cat > package.json << 'EOF'
 {
   "name": "my-v0-project",
   "version": "0.1.0",
@@ -9,6 +22,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
@@ -27,47 +41,27 @@
     "@radix-ui/react-progress": "1.1.1",
     "@radix-ui/react-radio-group": "1.2.2",
     "@radix-ui/react-scroll-area": "1.2.2",
-    "@radix-ui/react-select": "2.1.4",
+    "@radix-ui/react-select": "latest",
     "@radix-ui/react-separator": "1.1.1",
     "@radix-ui/react-slider": "1.2.2",
-    "@radix-ui/react-slot": "1.1.1",
+    "@radix-ui/react-slot": "latest",
     "@radix-ui/react-switch": "1.1.2",
     "@radix-ui/react-tabs": "1.1.2",
     "@radix-ui/react-toast": "1.2.4",
     "@radix-ui/react-toggle": "1.1.1",
     "@radix-ui/react-toggle-group": "1.1.1",
     "@radix-ui/react-tooltip": "1.1.6",
-    "@sanity/client": "latest",
-    "@sanity/icons": "latest",
-    "@sanity/types": "latest",
-    "@sanity/ui": "latest",
-    "@sanity/vision": "latest",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "cmdk": "1.0.4",
-    "date-fns": "4.1.0",
-    "embla-carousel-react": "8.5.1",
-    "fs": "latest",
-    "input-otp": "1.4.1",
+    "framer-motion": "latest",
     "lucide-react": "^0.454.0",
     "next": "14.2.16",
-    "next-sanity": "latest",
-    "next-themes": "latest",
-    "path": "latest",
+    "next-themes": "^0.4.4",
     "react": "^18",
-    "react-day-picker": "8.10.1",
     "react-dom": "^18",
-    "react-hook-form": "^7.54.1",
-    "react-resizable-panels": "^2.1.7",
-    "recharts": "2.15.0",
-    "sanity": "latest",
-    "sonner": "^1.7.1",
-    "styled-components": "latest",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7",
-    "vaul": "^0.9.6",
-    "zod": "^3.24.1"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^22",
@@ -78,3 +72,13 @@
     "typescript": "^5"
   }
 }
+EOF
+
+# Создаем структуру папок
+sudo -u intoclouds mkdir -p app/{admin,api/contact,lib,studio/[[...index]]} components lib public
+
+echo "✅ Основная структура создана"
+echo "📦 Установка зависимостей..."
+sudo -u intoclouds npm install
+
+echo "🔨 Создание конфигурационных файлов..."
