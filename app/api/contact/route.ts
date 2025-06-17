@@ -1,5 +1,4 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { submitContactForm } from "@/lib/strapi"
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,23 +16,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Неверный формат email" }, { status: 400 })
     }
 
-    // Отправка в Strapi
-    try {
-      await submitContactForm({
-        name,
-        email,
-        message,
-        language,
-      })
-    } catch (strapiError) {
-      console.error("Strapi submission error:", strapiError)
-      // Продолжаем выполнение, даже если Strapi недоступен
-    }
-
-    // Отправка email (существующий код)
+    // Отправка email
     const nodemailer = require("nodemailer")
 
-    const transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransporter({
       host: process.env.SMTP_HOST || "mail.intoclouds.io",
       port: Number.parseInt(process.env.SMTP_PORT || "465"),
       secure: true,
@@ -101,37 +87,7 @@ export async function POST(request: NextRequest) {
       `,
     })
 
-    // Пример с отправкой в Telegram (нужно создать бота и получить токен)
-    /*
-    const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN
-    const telegramChatId = process.env.TELEGRAM_CHAT_ID
-    
-    if (telegramBotToken && telegramChatId) {
-      const telegramMessage = `
-🚀 *Новое сообщение с IntoClouds*
-
-👤 *Имя:* ${name}
-📧 *Email:* ${email}
-💬 *Сообщение:*
-${message}
-      `
-      
-      await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: telegramChatId,
-          text: telegramMessage,
-          parse_mode: 'Markdown',
-        }),
-      })
-    }
-    */
-
     // Сохранение в базу данных (пример с простым JSON файлом)
-    // В продакшене лучше использовать настоящую БД
     const fs = require("fs").promises
     const path = require("path")
 
